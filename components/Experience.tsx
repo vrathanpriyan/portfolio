@@ -59,11 +59,11 @@ const Experience = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-5xl md:text-6xl font-extrabold text-white mb-6 drop-shadow-lg tracking-tight">
             Work <span className="gradient-text">Experience</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"></div>
-          <p className="text-gray-300 max-w-2xl mx-auto">
+          <div className="w-28 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-2"></div>
+          <p className="text-gray-200 max-w-2xl mx-auto text-lg">
             My professional journey and the experiences that have shaped my career
             as a full-stack developer.
           </p>
@@ -73,7 +73,7 @@ const Experience = () => {
           {experiences.map((exp, index) => (
             <motion.div
               key={exp.id}
-              className="relative mb-12 last:mb-0"
+              className="relative mb-16 last:mb-0"
               initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
@@ -81,52 +81,52 @@ const Experience = () => {
             >
               {/* Timeline line */}
               {index < experiences.length - 1 && (
-                <div className="absolute left-8 top-16 w-0.5 h-full bg-gradient-to-b from-blue-500 to-purple-500 hidden md:block"></div>
+                <div className="absolute left-8 top-20 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-500 hidden md:block rounded-full"></div>
               )}
 
-              <div className="flex flex-col md:flex-row gap-8">
+              <div className="flex flex-col md:flex-row gap-10">
                 {/* Timeline dot */}
                 <div className="flex-shrink-0 hidden md:flex items-start">
                   <motion.div
-                    className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg"
-                    whileHover={{ scale: 1.1 }}
+                    className="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl border-4 border-white/20"
+                    whileHover={{ scale: 1.13 }}
                   >
-                    <Briefcase className="text-white" size={24} />
+                    <Briefcase className="text-white" size={32} />
                   </motion.div>
                 </div>
 
                 {/* Content */}
                 <motion.div
-                  className="flex-1 glass-effect rounded-xl p-6 hover:shadow-xl transition-shadow duration-300"
+                  className="flex-1 glass-effect rounded-2xl p-10 shadow-xl hover:shadow-2xl transition-shadow duration-300"
                   whileHover={{ y: -5 }}
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-1">
+                      <h3 className="text-2xl font-bold text-white mb-1">
                         {exp.position}
                       </h3>
-                      <h4 className="text-blue-400 font-medium mb-2">
+                      <h4 className="text-blue-400 font-semibold mb-2">
                         {exp.company}
                       </h4>
                     </div>
-                    <div className="flex flex-col sm:items-end text-sm text-gray-400">
+                    <div className="flex flex-col sm:items-end text-base text-gray-400">
                       <div className="flex items-center gap-1 mb-1">
-                        <Calendar size={14} />
+                        <Calendar size={16} />
                         {exp.duration}
                       </div>
                       <div className="flex items-center gap-1">
-                        <MapPin size={14} />
+                        <MapPin size={16} />
                         {exp.location}
                       </div>
                     </div>
                   </div>
 
-                  <p className="text-gray-300 mb-4 leading-relaxed">
+                  <p className="text-gray-200 mb-4 leading-relaxed text-lg">
                     {exp.description}
                   </p>
 
                   <div className="mb-4">
-                    <h5 className="text-white font-medium mb-2">Key Achievements:</h5>
+                    <h5 className="text-white font-semibold mb-2">Key Achievements:</h5>
                     <ul className="list-disc list-inside text-gray-300 space-y-1">
                       {exp.achievements.map((achievement, i) => (
                         <li key={i}>{achievement}</li>
@@ -138,7 +138,7 @@ const Experience = () => {
                     {exp.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm"
+                        className="bg-blue-500/20 text-blue-300 px-4 py-1 rounded-full text-base font-medium"
                       >
                         {tech}
                       </span>

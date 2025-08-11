@@ -65,61 +65,63 @@ const Skills = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-5xl md:text-6xl font-extrabold text-white mb-6 drop-shadow-lg tracking-tight">
             My <span className="gradient-text">Skills</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"></div>
-          <p className="text-gray-300 max-w-2xl mx-auto">
+          <div className="w-28 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-2"></div>
+          <p className="text-gray-200 max-w-2xl mx-auto text-lg">
             Technologies and tools I use to bring ideas to life and create
             amazing digital experiences.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
-              className="glass-effect rounded-xl p-6"
+              className="glass-effect rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-200"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ y: -5 }}
             >
-              <div className="flex items-center mb-6">
-                <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-3 rounded-lg mr-3">
-                  <category.icon className="text-white" size={24} />
+              <div className="flex items-center mb-8">
+                <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-4 rounded-lg mr-4 shadow-lg">
+                  <category.icon className="text-white" size={28} />
                 </div>
-                <h3 className="text-xl font-bold text-white">{category.title}</h3>
+                <h3 className="text-2xl font-bold text-white drop-shadow">
+                  {category.title}
+                </h3>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-5">
                 {category.skills.map((skill, skillIndex) => (
                   <motion.div
                     key={skill.name}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ 
-                      duration: 0.4, 
-                      delay: categoryIndex * 0.1 + skillIndex * 0.05 
+                    transition={{
+                      duration: 0.4,
+                      delay: categoryIndex * 0.1 + skillIndex * 0.05
                     }}
                     viewport={{ once: true }}
                   >
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-300 text-sm font-medium">
+                      <span className="text-gray-300 text-base font-semibold">
                         {skill.name}
                       </span>
-                      <span className="text-blue-400 text-sm">
+                      <span className="text-blue-400 text-base font-bold">
                         {skill.level}%
                       </span>
                     </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div className="w-full bg-gray-700 rounded-full h-3">
                       <motion.div
-                        className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full"
+                        className="bg-gradient-to-r from-blue-500 to-purple-600 h-3 rounded-full shadow-md"
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.level}%` }}
-                        transition={{ 
-                          duration: 1, 
+                        transition={{
+                          duration: 1,
                           delay: categoryIndex * 0.1 + skillIndex * 0.05,
                           ease: "easeOut"
                         }}
@@ -134,17 +136,17 @@ const Skills = () => {
         </div>
 
         <motion.div
-          className="mt-16 text-center"
+          className="mt-20 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <div className="glass-effect rounded-xl p-8 max-w-3xl mx-auto">
-            <h3 className="text-2xl font-bold text-white mb-4">
+          <div className="glass-effect rounded-2xl p-10 max-w-3xl mx-auto shadow-xl">
+            <h3 className="text-3xl font-bold text-white mb-4 drop-shadow">
               Always Learning
             </h3>
-            <p className="text-gray-300 leading-relaxed">
+            <p className="text-gray-200 leading-relaxed text-lg">
               Technology evolves rapidly, and I'm committed to continuous learning.
               I regularly explore new frameworks, attend conferences, and contribute
               to open-source projects to stay at the forefront of web development.
