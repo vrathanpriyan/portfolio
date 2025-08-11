@@ -12,6 +12,7 @@ const Header = ({ activeSection }: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [theme, setTheme] = useState<'light' | 'dark'>(typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+  const [mounted, setMounted] = useState(false);
 
   const navItems = [
     { name: 'Home', href: '#home' },
@@ -23,6 +24,7 @@ const Header = ({ activeSection }: HeaderProps) => {
   ]
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
     }
@@ -97,15 +99,17 @@ const Header = ({ activeSection }: HeaderProps) => {
                 </motion.button>
               ))}
             </div>
-            {/* Theme Toggle */}
-            <motion.button
-              onClick={toggleTheme}
-              className="ml-4 p-2 rounded-full border border-white/10 bg-black/20 dark:bg-white/10 text-yellow-400 dark:text-blue-400 shadow-md hover:scale-110 transition-all duration-200"
-              whileTap={{ rotate: 20, scale: 0.95 }}
-              aria-label="Toggle dark mode"
-            >
-              {theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />}
-            </motion.button>
+            {/* Theme Toggle - only render on client to avoid hydration error */}
+            {mounted && (
+              <motion.button
+                onClick={toggleTheme}
+                className="ml-4 p-2 rounded-full border border-white/10 bg-black/20 dark:bg-white/10 text-yellow-400 dark:text-blue-400 shadow-md hover:scale-110 transition-all duration-200"
+                whileTap={{ rotate: 20, scale: 0.95 }}
+                aria-label="Toggle dark mode"
+              >
+                {theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />}
+              </motion.button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
