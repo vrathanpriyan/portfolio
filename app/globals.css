@@ -20,11 +20,14 @@ body {
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      135deg,
+      #0f0f23 0%,
+      #1a1a2e 25%,
+      #16213e 50%,
+      #0f3460 75%,
+      #533483 100%
+    );
+  min-height: 100vh;
 }
 
 a {

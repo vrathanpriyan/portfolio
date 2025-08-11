@@ -13,28 +13,53 @@ const Hero = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background Animation */}
+      {/* Enhanced Background Animation */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -inset-10 opacity-50">
-          {[...Array(20)].map((_, i) => (
+        <div className="absolute -inset-10 opacity-30">
+          {[...Array(15)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute bg-white/10 rounded-full"
+              className="absolute bg-gradient-to-r from-blue-400/20 to-purple-500/20 rounded-full blur-xl"
               style={{
-                width: Math.random() * 300 + 50,
-                height: Math.random() * 300 + 50,
+                width: Math.random() * 400 + 100,
+                height: Math.random() * 400 + 100,
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
               }}
               animate={{
-                x: [0, Math.random() * 100 - 50],
-                y: [0, Math.random() * 100 - 50],
-                scale: [1, 1.1, 1],
+                x: [0, Math.random() * 200 - 100],
+                y: [0, Math.random() * 200 - 100],
+                scale: [1, 1.2, 1],
+                rotate: [0, 360],
               }}
               transition={{
-                duration: Math.random() * 10 + 10,
+                duration: Math.random() * 20 + 15,
                 repeat: Infinity,
                 repeatType: 'reverse',
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+        
+        {/* Particle Effect */}
+        <div className="absolute inset-0">
+          {[...Array(50)].map((_, i) => (
+            <motion.div
+              key={`particle-${i}`}
+              className="absolute w-1 h-1 bg-white rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -100, 0],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: Math.random() * 3 + 2,
+                repeat: Infinity,
+                delay: Math.random() * 2,
               }}
             />
           ))}

@@ -35,17 +35,37 @@ const About = () => {
             viewport={{ once: true }}
           >
             <div className="relative">
-              <div className="w-80 h-80 mx-auto bg-gradient-to-br from-blue-500 to-purple-600 rounded-full p-1">
-                <div className="w-full h-full bg-gray-800 rounded-full flex items-center justify-center">
-                  <div className="text-6xl">👨‍💻</div>
+              <div className="w-80 h-80 mx-auto bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 rounded-full p-1 shadow-2xl">
+                <div className="w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 rounded-full flex items-center justify-center relative overflow-hidden">
+                  <div className="text-6xl z-10">👨‍💻</div>
+                  {/* Inner glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-500/20 rounded-full"></div>
                 </div>
               </div>
+              
+              {/* Floating elements */}
               <motion.div
-                className="absolute -top-4 -right-4 w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center"
+                className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               >
                 <Zap className="text-gray-900" size={32} />
+              </motion.div>
+              
+              <motion.div
+                className="absolute -bottom-6 -left-6 w-16 h-16 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center shadow-lg"
+                animate={{ y: [-10, 10, -10] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <Code className="text-white" size={24} />
+              </motion.div>
+              
+              <motion.div
+                className="absolute top-1/2 -left-8 w-12 h-12 bg-gradient-to-r from-pink-400 to-red-500 rounded-full flex items-center justify-center shadow-lg"
+                animate={{ x: [-5, 5, -5] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <Heart className="text-white" size={20} />
               </motion.div>
             </div>
           </motion.div>
