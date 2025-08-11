@@ -111,13 +111,10 @@ const Skills = () => {
                       <span className="text-gray-300 text-base font-semibold">
                         {skill.name}
                       </span>
-                      <span className="text-blue-400 text-base font-bold">
-                        {skill.level}%
-                      </span>
                     </div>
-                    <div className="w-full bg-gray-700 rounded-full h-3">
+                    <div className="w-full bg-gray-700 rounded-full h-4 relative overflow-visible">
                       <motion.div
-                        className="bg-gradient-to-r from-blue-500 to-purple-600 h-3 rounded-full shadow-md"
+                        className="bg-gradient-to-r from-blue-500 to-purple-600 h-4 rounded-full shadow-md flex items-center justify-end pr-2"
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.level}%` }}
                         transition={{
@@ -126,7 +123,32 @@ const Skills = () => {
                           ease: "easeOut"
                         }}
                         viewport={{ once: true }}
-                      />
+                      >
+                        <motion.span
+                          className={`absolute right-3 top-1/2 -translate-y-1/2 font-bold text-sm select-none ${
+                            skill.level >= 90 ? 'text-blue-200' : skill.level >= 75 ? 'text-purple-200' : 'text-gray-200'
+                          }`}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          transition={{
+                            duration: 0.5,
+                            delay: categoryIndex * 0.1 + skillIndex * 0.05 + 0.5
+                          }}
+                          viewport={{ once: true }}
+                        >
+                          <motion.span
+                            initial={{ count: 0 }}
+                            animate={{ count: skill.level }}
+                            transition={{
+                              duration: 1,
+                              delay: categoryIndex * 0.1 + skillIndex * 0.05,
+                              ease: "easeOut"
+                            }}
+                          >
+                            {Math.round(skill.level)}%
+                          </motion.span>
+                        </motion.span>
+                      </motion.div>
                     </div>
                   </motion.div>
                 ))}

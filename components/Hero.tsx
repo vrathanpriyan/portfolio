@@ -12,9 +12,9 @@ const Hero = () => {
   }
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section className="w-full min-h-screen h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Enhanced Background Animation */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -inset-10 opacity-30">
           {[...Array(15)].map((_, i) => (
             <motion.div
@@ -41,7 +41,6 @@ const Hero = () => {
             />
           ))}
         </div>
-        
         {/* Particle Effect */}
         <div className="absolute inset-0">
           {[...Array(50)].map((_, i) => (
@@ -66,7 +65,19 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10 flex justify-center items-center">
+      {/* Floating Avatar Animation */}
+      <motion.div
+        className="absolute left-1/2 top-32 md:top-24 z-20 -translate-x-1/2"
+        initial={{ y: -30, opacity: 0 }}
+        animate={{ y: [0, 20, 0], opacity: 1 }}
+        transition={{ duration: 3, repeat: Infinity, repeatType: 'reverse', delay: 0.5 }}
+      >
+        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 flex items-center justify-center shadow-2xl border-4 border-white/20">
+          <span className="text-6xl md:text-7xl">👋</span>
+        </div>
+      </motion.div>
+
+      <div className="container mx-auto px-6 text-center relative z-10 flex justify-center items-center h-full">
         <motion.div
           className="glass-effect rounded-3xl shadow-2xl px-8 py-14 md:px-16 md:py-20 max-w-3xl w-full mx-auto border border-white/10 backdrop-blur-lg"
           initial={{ opacity: 0, y: 30 }}
@@ -110,7 +121,7 @@ const Hero = () => {
           >
             <motion.button
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-4 rounded-full font-bold text-lg shadow-lg transition-all duration-200 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-400/50"
-              whileHover={{ scale: 1.07 }}
+              whileHover={{ scale: 1.13, rotate: 2 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => {
                 const contactSection = document.getElementById('contact')
@@ -125,7 +136,7 @@ const Hero = () => {
 
             <motion.button
               className="border border-white/30 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 shadow-lg transition-all duration-200 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-400/50"
-              whileHover={{ scale: 1.07 }}
+              whileHover={{ scale: 1.13, rotate: -2 }}
               whileTap={{ scale: 0.97 }}
             >
               <Download size={22} />
@@ -150,7 +161,7 @@ const Hero = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors duration-200 text-2xl"
-                whileHover={{ scale: 1.2, y: -2 }}
+                whileHover={{ scale: 1.3, y: -4, rotate: 6 }}
                 whileTap={{ scale: 0.9 }}
               >
                 <Icon size={28} />
@@ -165,7 +176,7 @@ const Hero = () => {
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/60 hover:text-white transition-colors duration-200"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          whileHover={{ scale: 1.1 }}
+          whileHover={{ scale: 1.2, rotate: 8 }}
         >
           <ArrowDown size={32} />
         </motion.button>
