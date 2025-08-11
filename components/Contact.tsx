@@ -2,8 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react'
+import { useState } from 'react';
 
 const Contact = () => {
+  const [submitted, setSubmitted] = useState(false);
   const contactInfo = [
     {
       icon: Mail,
@@ -135,6 +137,8 @@ const Contact = () => {
               action="https://formspree.io/f/xkgzkagw"
               method="POST"
               className="glass-effect rounded-2xl p-10 shadow-xl"
+              target="formspree_iframe"
+              onSubmit={() => setTimeout(() => setSubmitted(true), 100)}
             >
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <div>
@@ -200,6 +204,12 @@ const Contact = () => {
                 Send Message
               </motion.button>
             </form>
+            <iframe name="formspree_iframe" style={{ display: 'none' }} />
+            {submitted && (
+              <div className="mt-6 text-green-400 text-center font-semibold text-lg">
+                Thank you! Your message has been sent.
+              </div>
+            )}
           </motion.div>
         </div>
       </div>

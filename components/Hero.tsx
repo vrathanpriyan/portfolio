@@ -120,7 +120,7 @@ const Hero = () => {
             className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto font-medium"
             variants={itemVariants}
           >
-            Full Stack Developer & TypeScript Enthusiast
+            Python Developer & TypeScript Enthusiast
           </motion.p>
 
           <motion.p
