@@ -2,6 +2,25 @@
 
 import { motion } from 'framer-motion'
 import { Code, Database, Server, Palette, Globe, Zap } from 'lucide-react'
+import { useEffect, useState } from "react";
+
+const AnimatedCount = ({ value }: { value: number }) => {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    let start = 0;
+    const end = value;
+    if (start === end) return;
+    let incrementTime = 15;
+    let current = start;
+    const timer = setInterval(() => {
+      current += 1;
+      setCount(current);
+      if (current >= end) clearInterval(timer);
+    }, incrementTime);
+    return () => clearInterval(timer);
+  }, [value]);
+  return <span>{count}%</span>;
+};
 
 const Skills = () => {
   const skillCategories = [
@@ -142,17 +161,7 @@ const Skills = () => {
                           }}
                           viewport={{ once: true }}
                         >
-                          <motion.span
-                            initial={{ count: 0 }}
-                            animate={{ count: skill.level }}
-                            transition={{
-                              duration: 1,
-                              delay: categoryIndex * 0.1 + skillIndex * 0.05,
-                              ease: "easeOut"
-                            }}
-                          >
-                            {Math.round(skill.level)}%
-                          </motion.span>
+                          <AnimatedCount value={skill.level} />
                         </motion.span>
                       </motion.div>
                     </div>
