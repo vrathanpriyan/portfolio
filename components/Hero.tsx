@@ -66,14 +66,15 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10">
+      <div className="container mx-auto px-6 text-center relative z-10 flex justify-center items-center">
         <motion.div
+          className="glass-effect rounded-3xl shadow-2xl px-8 py-14 md:px-16 md:py-20 max-w-3xl w-full mx-auto border border-white/10 backdrop-blur-lg"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
           <motion.h1
-            className="text-5xl md:text-7xl font-bold text-white mb-6"
+            className="text-5xl md:text-7xl font-extrabold text-white mb-6 drop-shadow-lg"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -83,7 +84,7 @@ const Hero = () => {
           </motion.h1>
 
           <motion.p
-            className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto"
+            className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto font-medium"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -92,7 +93,7 @@ const Hero = () => {
           </motion.p>
 
           <motion.p
-            className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto"
+            className="text-lg text-gray-300 mb-12 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -102,15 +103,15 @@ const Hero = () => {
           </motion.p>
 
           <motion.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
+            className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
             <motion.button
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-medium transition-colors duration-200 flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-4 rounded-full font-bold text-lg shadow-lg transition-all duration-200 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-400/50"
+              whileHover={{ scale: 1.07 }}
+              whileTap={{ scale: 0.97 }}
               onClick={() => {
                 const contactSection = document.getElementById('contact')
                 if (contactSection) {
@@ -118,22 +119,22 @@ const Hero = () => {
                 }
               }}
             >
-              <Mail size={20} />
+              <Mail size={22} />
               Get In Touch
             </motion.button>
 
             <motion.button
-              className="border border-white/30 text-white px-8 py-3 rounded-full font-medium hover:bg-white/10 transition-colors duration-200 flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="border border-white/30 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 shadow-lg transition-all duration-200 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-400/50"
+              whileHover={{ scale: 1.07 }}
+              whileTap={{ scale: 0.97 }}
             >
-              <Download size={20} />
+              <Download size={22} />
               Download Resume
             </motion.button>
           </motion.div>
 
           <motion.div
-            className="flex items-center justify-center gap-6"
+            className="flex items-center justify-center gap-8 mb-2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.0 }}
@@ -148,11 +149,11 @@ const Hero = () => {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors duration-200"
+                className="text-gray-400 hover:text-white transition-colors duration-200 text-2xl"
                 whileHover={{ scale: 1.2, y: -2 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <Icon size={24} />
+                <Icon size={28} />
                 <span className="sr-only">{label}</span>
               </motion.a>
             ))}

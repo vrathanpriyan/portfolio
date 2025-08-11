@@ -40,9 +40,10 @@ const Header = ({ activeSection }: HeaderProps) => {
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'glass-effect shadow-lg' : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-white/10 backdrop-blur-lg ${
+        isScrolled ? 'glass-effect shadow-2xl' : 'bg-transparent'
       }`}
+      style={{ boxShadow: isScrolled ? '0 8px 32px 0 rgba(31, 38, 135, 0.15)' : undefined }}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
@@ -50,8 +51,8 @@ const Header = ({ activeSection }: HeaderProps) => {
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <motion.div
-            className="text-2xl font-bold gradient-text"
-            whileHover={{ scale: 1.05 }}
+            className="text-2xl md:text-3xl font-extrabold gradient-text tracking-wide drop-shadow-lg select-none cursor-pointer"
+            whileHover={{ scale: 1.08 }}
           >
             Portfolio
           </motion.div>
@@ -62,13 +63,13 @@ const Header = ({ activeSection }: HeaderProps) => {
               <motion.button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className={`text-sm font-medium transition-colors duration-200 hover:text-blue-400 ${
+                className={`text-base font-semibold transition-colors duration-200 hover:text-blue-400 px-2 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400/50 ${
                   activeSection === item.href.slice(1)
-                    ? 'text-blue-400'
+                    ? 'text-blue-400 underline underline-offset-4'
                     : 'text-white/80'
                 }`}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.12 }}
+                whileTap={{ scale: 0.97 }}
               >
                 {item.name}
               </motion.button>
@@ -79,7 +80,7 @@ const Header = ({ activeSection }: HeaderProps) => {
           <div className="md:hidden">
             <motion.button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-white p-2"
+              className="text-white p-2 rounded-full bg-black/30 backdrop-blur-md border border-white/10 shadow-md"
               whileTap={{ scale: 0.95 }}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -90,7 +91,7 @@ const Header = ({ activeSection }: HeaderProps) => {
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <motion.div
-            className="md:hidden mt-4 pb-4"
+            className="md:hidden mt-4 pb-4 rounded-xl glass-effect shadow-lg border border-white/10 backdrop-blur-lg"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -99,9 +100,9 @@ const Header = ({ activeSection }: HeaderProps) => {
               <motion.button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className={`block w-full text-left py-2 px-4 text-sm font-medium transition-colors duration-200 hover:text-blue-400 ${
+                className={`block w-full text-left py-3 px-6 text-base font-semibold transition-colors duration-200 hover:text-blue-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400/50 ${
                   activeSection === item.href.slice(1)
-                    ? 'text-blue-400'
+                    ? 'text-blue-400 underline underline-offset-4'
                     : 'text-white/80'
                 }`}
                 whileHover={{ x: 10 }}
