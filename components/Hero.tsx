@@ -71,17 +71,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Floating Avatar Animation */}
-      <motion.div
-        className="absolute left-1/2 top-32 md:top-24 z-20 -translate-x-1/2"
-        initial={{ y: -30, opacity: 0 }}
-        animate={{ y: [0, 20, 0], opacity: 1 }}
-        transition={{ duration: 3, repeat: Infinity, repeatType: 'reverse', delay: 0.5 }}
-      >
-        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 flex items-center justify-center shadow-2xl border-4 border-white/20">
-          <span className="text-6xl md:text-7xl">👋</span>
-        </div>
-      </motion.div>
+      {/* Floating Avatar Animation removed for cleaner look */}
 
       <div className="container mx-auto px-6 text-center relative z-10 flex justify-center items-center h-full">
         <motion.div
