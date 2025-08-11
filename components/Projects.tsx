@@ -1,0 +1,182 @@
+'use client'
+
+import { motion } from 'framer-motion'
+import { ExternalLink, Github, Eye } from 'lucide-react'
+
+const Projects = () => {
+  const projects = [
+    {
+      id: 1,
+      title: 'E-Commerce Platform',
+      description: 'A full-stack e-commerce solution built with Next.js, TypeScript, and Stripe integration.',
+      technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'PostgreSQL'],
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop',
+      github: 'https://github.com',
+      live: 'https://example.com',
+      featured: true
+    },
+    {
+      id: 2,
+      title: 'Task Management App',
+      description: 'A collaborative task management application with real-time updates and team features.',
+      technologies: ['React', 'Node.js', 'Socket.io', 'MongoDB', 'Express'],
+      image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=500&h=300&fit=crop',
+      github: 'https://github.com',
+      live: 'https://example.com',
+      featured: true
+    },
+    {
+      id: 3,
+      title: 'Weather Dashboard',
+      description: 'A beautiful weather dashboard with location-based forecasts and interactive charts.',
+      technologies: ['React', 'TypeScript', 'Chart.js', 'Weather API'],
+      image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=500&h=300&fit=crop',
+      github: 'https://github.com',
+      live: 'https://example.com',
+      featured: false
+    },
+    {
+      id: 4,
+      title: 'Social Media Analytics',
+      description: 'Analytics dashboard for social media metrics with data visualization and insights.',
+      technologies: ['Vue.js', 'D3.js', 'Python', 'FastAPI', 'Redis'],
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop',
+      github: 'https://github.com',
+      live: 'https://example.com',
+      featured: false
+    }
+  ]
+
+  return (
+    <section className="py-20">
+      <div className="container mx-auto px-6">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            My <span className="gradient-text">Projects</span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"></div>
+          <p className="text-gray-300 max-w-2xl mx-auto">
+            Here are some of my recent projects that showcase my skills and experience
+            in full-stack development.
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {projects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              className="glass-effect rounded-xl overflow-hidden group hover:shadow-2xl transition-all duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5 }}
+            >
+              <div className="relative overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div className="flex gap-4">
+                    <motion.a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-white/20 backdrop-blur-sm p-3 rounded-full text-white hover:bg-white/30 transition-colors"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <Github size={20} />
+                    </motion.a>
+                    <motion.a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-white/20 backdrop-blur-sm p-3 rounded-full text-white hover:bg-white/30 transition-colors"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <ExternalLink size={20} />
+                    </motion.a>
+                  </div>
+                </div>
+                {project.featured && (
+                  <div className="absolute top-4 left-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    Featured
+                  </div>
+                )}
+              </div>
+
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-white mb-3">
+                  {project.title}
+                </h3>
+                <p className="text-gray-300 mb-4 leading-relaxed">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex gap-4">
+                  <motion.a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+                    whileHover={{ x: 5 }}
+                  >
+                    <Github size={16} />
+                    Code
+                  </motion.a>
+                  <motion.a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+                    whileHover={{ x: 5 }}
+                  >
+                    <Eye size={16} />
+                    Live Demo
+                  </motion.a>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          className="text-center mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
+          <motion.button
+            className="border border-white/30 text-white px-8 py-3 rounded-full font-medium hover:bg-white/10 transition-colors duration-200"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            View All Projects
+          </motion.button>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+export default Projects

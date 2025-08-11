@@ -1,0 +1,159 @@
+'use client'
+
+import { motion } from 'framer-motion'
+import { Code, Database, Server, Palette, Globe, Zap } from 'lucide-react'
+
+const Skills = () => {
+  const skillCategories = [
+    {
+      title: 'Frontend',
+      icon: Palette,
+      skills: [
+        { name: 'React', level: 95 },
+        { name: 'Next.js', level: 90 },
+        { name: 'TypeScript', level: 88 },
+        { name: 'Tailwind CSS', level: 92 },
+        { name: 'Vue.js', level: 75 },
+        { name: 'JavaScript', level: 95 }
+      ]
+    },
+    {
+      title: 'Backend',
+      icon: Server,
+      skills: [
+        { name: 'Node.js', level: 90 },
+        { name: 'Express.js', level: 85 },
+        { name: 'Python', level: 80 },
+        { name: 'FastAPI', level: 75 },
+        { name: 'GraphQL', level: 70 },
+        { name: 'REST APIs', level: 95 }
+      ]
+    },
+    {
+      title: 'Database',
+      icon: Database,
+      skills: [
+        { name: 'PostgreSQL', level: 85 },
+        { name: 'MongoDB', level: 80 },
+        { name: 'Redis', level: 70 },
+        { name: 'MySQL', level: 75 },
+        { name: 'Prisma', level: 80 },
+        { name: 'Firebase', level: 85 }
+      ]
+    },
+    {
+      title: 'DevOps & Tools',
+      icon: Zap,
+      skills: [
+        { name: 'Docker', level: 80 },
+        { name: 'AWS', level: 75 },
+        { name: 'Git', level: 95 },
+        { name: 'CI/CD', level: 70 },
+        { name: 'Vercel', level: 90 },
+        { name: 'Linux', level: 75 }
+      ]
+    }
+  ]
+
+  return (
+    <section className="py-20">
+      <div className="container mx-auto px-6">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            My <span className="gradient-text">Skills</span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"></div>
+          <p className="text-gray-300 max-w-2xl mx-auto">
+            Technologies and tools I use to bring ideas to life and create
+            amazing digital experiences.
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {skillCategories.map((category, categoryIndex) => (
+            <motion.div
+              key={category.title}
+              className="glass-effect rounded-xl p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5 }}
+            >
+              <div className="flex items-center mb-6">
+                <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-3 rounded-lg mr-3">
+                  <category.icon className="text-white" size={24} />
+                </div>
+                <h3 className="text-xl font-bold text-white">{category.title}</h3>
+              </div>
+
+              <div className="space-y-4">
+                {category.skills.map((skill, skillIndex) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ 
+                      duration: 0.4, 
+                      delay: categoryIndex * 0.1 + skillIndex * 0.05 
+                    }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-gray-300 text-sm font-medium">
+                        {skill.name}
+                      </span>
+                      <span className="text-blue-400 text-sm">
+                        {skill.level}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <motion.div
+                        className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${skill.level}%` }}
+                        transition={{ 
+                          duration: 1, 
+                          delay: categoryIndex * 0.1 + skillIndex * 0.05,
+                          ease: "easeOut"
+                        }}
+                        viewport={{ once: true }}
+                      />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
+          <div className="glass-effect rounded-xl p-8 max-w-3xl mx-auto">
+            <h3 className="text-2xl font-bold text-white mb-4">
+              Always Learning
+            </h3>
+            <p className="text-gray-300 leading-relaxed">
+              Technology evolves rapidly, and I'm committed to continuous learning.
+              I regularly explore new frameworks, attend conferences, and contribute
+              to open-source projects to stay at the forefront of web development.
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+export default Skills
