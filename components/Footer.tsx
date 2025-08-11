@@ -38,7 +38,7 @@ const Footer = () => {
               Made with <Heart className="text-red-500" size={16} /> using Next.js & TypeScript
             </p>
             <p className="text-gray-500 text-sm mt-2">
-              © 2024 Your Name. All rights reserved.
+              © 2024 Rathan Priyan. All rights reserved.
             </p>
           </motion.div>
         </div>

@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "author": "Rathan Priyan",
   "dependencies": {
     "next": "14.0.0",
     "react": "^18",
