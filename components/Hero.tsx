@@ -12,7 +12,13 @@ const Hero = () => {
   }
 
   return (
-    <section className="w-full min-h-screen h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <motion.section
+      className="w-full min-h-screen h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+    >
       {/* Enhanced Background Animation */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -inset-10 opacity-30">
@@ -181,7 +187,7 @@ const Hero = () => {
           <ArrowDown size={32} />
         </motion.button>
       </div>
-    </section>
+    </motion.section>
   )
 }
 

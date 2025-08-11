@@ -17,12 +17,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // Theme will be set by a script or context, so just render the html with className
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-          {children}
-        </div>
+        {children}
       </body>
     </html>
   )

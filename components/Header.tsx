@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Sun, Moon } from 'lucide-react'
 
 interface HeaderProps {
   activeSection: string
@@ -11,6 +11,7 @@ interface HeaderProps {
 const Header = ({ activeSection }: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [theme, setTheme] = useState<'light' | 'dark'>(typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
 
   const navItems = [
     { name: 'Home', href: '#home' },
@@ -29,6 +30,26 @@ const Header = ({ activeSection }: HeaderProps) => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    // On mount, set theme from localStorage or system
+    const stored = typeof window !== 'undefined' ? localStorage.getItem('theme') : null
+    if (stored === 'dark' || stored === 'light') {
+      setTheme(stored)
+      document.documentElement.classList.toggle('dark', stored === 'dark')
+    } else {
+      document.documentElement.classList.toggle('dark', theme === 'dark')
+    }
+  }, [])
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark'
+    setTheme(newTheme)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('theme', newTheme)
+      document.documentElement.classList.toggle('dark', newTheme === 'dark')
+    }
+  }
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href)
@@ -57,23 +78,34 @@ const Header = ({ activeSection }: HeaderProps) => {
             Portfolio
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <motion.button
-                key={item.name}
-                onClick={() => scrollToSection(item.href)}
-                className={`text-base font-semibold transition-colors duration-200 hover:text-blue-400 px-2 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400/50 ${
-                  activeSection === item.href.slice(1)
-                    ? 'text-blue-400 underline underline-offset-4'
-                    : 'text-white/80'
-                }`}
-                whileHover={{ scale: 1.12 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                {item.name}
-              </motion.button>
-            ))}
+          <div className="flex items-center gap-4">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              {navItems.map((item) => (
+                <motion.button
+                  key={item.name}
+                  onClick={() => scrollToSection(item.href)}
+                  className={`text-base font-semibold transition-colors duration-200 hover:text-blue-400 px-2 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400/50 ${
+                    activeSection === item.href.slice(1)
+                      ? 'text-blue-400 underline underline-offset-4'
+                      : 'text-white/80 dark:text-gray-200'
+                  }`}
+                  whileHover={{ scale: 1.12 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  {item.name}
+                </motion.button>
+              ))}
+            </div>
+            {/* Theme Toggle */}
+            <motion.button
+              onClick={toggleTheme}
+              className="ml-4 p-2 rounded-full border border-white/10 bg-black/20 dark:bg-white/10 text-yellow-400 dark:text-blue-400 shadow-md hover:scale-110 transition-all duration-200"
+              whileTap={{ rotate: 20, scale: 0.95 }}
+              aria-label="Toggle dark mode"
+            >
+              {theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />}
+            </motion.button>
           </div>
 
           {/* Mobile Menu Button */}

@@ -56,7 +56,13 @@ const Skills = () => {
   ]
 
   return (
-    <section className="py-20">
+    <motion.section
+      className="py-20"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+    >
       <div className="container mx-auto px-6">
         <motion.div
           className="text-center mb-16"
@@ -176,7 +182,7 @@ const Skills = () => {
           </div>
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 
