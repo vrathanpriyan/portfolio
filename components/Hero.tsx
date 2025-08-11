@@ -1,27 +1,57 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useAnimation, useInView } from 'framer-motion';
+import { useRef, useEffect } from 'react';
 import { ArrowDown, Github, Linkedin, Mail, Download } from 'lucide-react'
 
 const Hero = () => {
   const scrollToNext = () => {
-    const aboutSection = document.getElementById('about')
+    const aboutSection = document.getElementById('about');
     if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: 'smooth' })
+      aboutSection.scrollIntoView({ behavior: 'smooth' });
     }
-  }
+  };
+
+  // Animation controls for staggered entrance
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const controls = useAnimation();
+  useEffect(() => {
+    if (isInView) {
+      controls.start('visible');
+    }
+  }, [isInView, controls]);
+
+  // Variants for staggered animation
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.18,
+      },
+    },
+  };
+  const itemVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
+  };
 
   return (
     <motion.section
       className="w-full min-h-screen h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
+      initial="hidden"
+      animate={controls}
+      variants={containerVariants}
+      ref={ref}
     >
-      {/* Enhanced Background Animation */}
+      {/* Animated Parallax Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -inset-10 opacity-30">
+        <motion.div
+          className="absolute -inset-10 opacity-30"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2 }}
+        >
           {[...Array(15)].map((_, i) => (
             <motion.div
               key={i}
@@ -42,11 +72,11 @@ const Hero = () => {
                 duration: Math.random() * 20 + 15,
                 repeat: Infinity,
                 repeatType: 'reverse',
-                ease: "easeInOut",
+                ease: 'easeInOut',
               }}
             />
           ))}
-        </div>
+        </motion.div>
         {/* Particle Effect */}
         <div className="absolute inset-0">
           {[...Array(50)].map((_, i) => (
@@ -71,20 +101,16 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Floating Avatar Animation removed for cleaner look */}
-
       <div className="container mx-auto px-6 text-center relative z-10 flex justify-center items-center h-full">
         <motion.div
           className="glass-effect rounded-3xl shadow-2xl px-8 py-14 md:px-16 md:py-20 max-w-3xl w-full mx-auto border border-white/10 backdrop-blur-lg"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          variants={containerVariants}
+          initial="hidden"
+          animate={controls}
         >
           <motion.h1
             className="text-5xl md:text-7xl font-extrabold text-white mb-6 drop-shadow-lg"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            variants={itemVariants}
           >
             Hi, I'm{' '}
             <span className="gradient-text">Rathan Priyan</span>
@@ -92,18 +118,14 @@ const Hero = () => {
 
           <motion.p
             className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto font-medium"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            variants={itemVariants}
           >
             Full Stack Developer & TypeScript Enthusiast
           </motion.p>
 
           <motion.p
             className="text-lg text-gray-300 mb-12 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            variants={itemVariants}
           >
             I create beautiful, functional, and user-friendly web applications
             using modern technologies like React, Next.js, and TypeScript.
@@ -111,18 +133,18 @@ const Hero = () => {
 
           <motion.div
             className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            variants={itemVariants}
           >
             <motion.button
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-4 rounded-full font-bold text-lg shadow-lg transition-all duration-200 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-400/50"
-              whileHover={{ scale: 1.13, rotate: 2 }}
+              whileHover={{ scale: 1.13, boxShadow: '0 0 16px #7f5af0' }}
               whileTap={{ scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+              variants={itemVariants}
               onClick={() => {
-                const contactSection = document.getElementById('contact')
+                const contactSection = document.getElementById('contact');
                 if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: 'smooth' })
+                  contactSection.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
             >
@@ -132,8 +154,10 @@ const Hero = () => {
 
             <motion.button
               className="border border-white/30 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 shadow-lg transition-all duration-200 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-400/50"
-              whileHover={{ scale: 1.13, rotate: -2 }}
+              whileHover={{ scale: 1.13, boxShadow: '0 0 16px #7f5af0' }}
               whileTap={{ scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+              variants={itemVariants}
             >
               <Download size={22} />
               Download Resume
@@ -142,9 +166,7 @@ const Hero = () => {
 
           <motion.div
             className="flex items-center justify-center gap-8 mb-2"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.0 }}
+            variants={itemVariants}
           >
             {[
               { icon: Github, href: 'https://github.com', label: 'GitHub' },
@@ -157,8 +179,9 @@ const Hero = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors duration-200 text-2xl"
-                whileHover={{ scale: 1.3, y: -4, rotate: 6 }}
+                whileHover={{ scale: 1.3, y: -4, rotate: 6, color: '#7f5af0' }}
                 whileTap={{ scale: 0.9 }}
+                transition={{ type: 'spring', stiffness: 300 }}
               >
                 <Icon size={28} />
                 <span className="sr-only">{label}</span>
@@ -178,7 +201,7 @@ const Hero = () => {
         </motion.button>
       </div>
     </motion.section>
-  )
+  );
 }
 
 export default Hero
